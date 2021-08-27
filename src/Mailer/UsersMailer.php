@@ -22,7 +22,9 @@ class UsersMailer extends Mailer
     {
         $this->setTo($user->nome)
         ->setProfile('teste')
-        ->setSubject(sprintf('bem-vindo, %s', $user->nome));
+        ->setEmailFormat('html')
+        ->setSubject(sprintf('bem-vindo, %s', $user->nome))
+        ->setViewVars(['token' => $user->token]);
 
     }
 }

@@ -22,6 +22,8 @@ class UsersFixture extends TestFixture
         'password' => ['type' => 'string', 'length' => null, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null],
         'created' => ['type' => 'timestampfractional', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => 6],
         'modified' => ['type' => 'timestampfractional', 'length' => null, 'default' => null, 'null' => true, 'comment' => null, 'precision' => 6],
+        'status' => ['type' => 'string', 'length' => 1, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null],
+        'token' => ['type' => 'string', 'length' => 50, 'default' => null, 'null' => true, 'collate' => null, 'comment' => null, 'precision' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id_user'], 'length' => []],
         ],
@@ -39,8 +41,10 @@ class UsersFixture extends TestFixture
                 'id_user' => 1,
                 'nome' => 'Lorem ipsum dolor sit amet',
                 'password' => 'Lorem ipsum dolor sit amet',
-                'created' => 1629491547,
-                'modified' => 1629491547,
+                'created' => 1630008724,
+                'modified' => 1630008724,
+                'status' => 'L',
+                'token' => 'Lorem ipsum dolor sit amet',
             ],
         ];
         parent::init();

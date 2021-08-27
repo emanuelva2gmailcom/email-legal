@@ -66,6 +66,16 @@ class UsersTable extends Table
             ->scalar('password')
             ->allowEmptyString('password');
 
+        $validator
+            ->scalar('status')
+            ->maxLength('status', 1)
+            ->allowEmptyString('status');
+
+        $validator
+            ->scalar('token')
+            ->maxLength('token', 50)
+            ->allowEmptyString('token');
+
         return $validator;
     }
 }

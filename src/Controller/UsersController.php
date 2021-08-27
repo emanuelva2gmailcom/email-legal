@@ -3,8 +3,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Cake\Mailer\MailerAwareTrait;
+// use Cake\Auth
 
+use Authentication\PasswordHasher\DefaultPasswordHasher;
+use Cake\Utility\Security;
+use Cake\Mailer\MailerAwareTrait;
 /**
  * Users Controller
  *
@@ -52,17 +55,27 @@ class UsersController extends AppController
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+            $mytoken = Security::hash(Security::randomBytes(32));
+            $user->token = $mytoken;
             if ($this->Users->save($user)) {
+                $this->getMailer('Users')
+                    ->send('welcome',[$user]);
 
-                $this->getMailer('Users')->send('welcome',[$user]);
-                
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('Confirme seu email'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $this->set(compact('user'));
+    }
+
+    public function verify($token)
+    {
+        $userTable = $this->Users;
+        $verify = $userTable->find('all')->where(['token'=>$token])->first();
+        $verify->status = '1';
+        $userTable->save($verify);
     }
 
     /**

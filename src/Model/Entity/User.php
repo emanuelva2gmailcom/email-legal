@@ -13,6 +13,8 @@ use Cake\ORM\Entity;
  * @property string|null $password
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
+ * @property string|null $status
+ * @property string|null $token
  */
 class User extends Entity
 {
@@ -30,6 +32,8 @@ class User extends Entity
         'password' => true,
         'created' => true,
         'modified' => true,
+        'status' => true,
+        'token' => true,
     ];
 
     /**
@@ -39,5 +43,6 @@ class User extends Entity
      */
     protected $_hidden = [
         'password',
+        'token',
     ];
 }
